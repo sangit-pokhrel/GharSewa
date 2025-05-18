@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ghar_sewa/view/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -109,7 +110,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     textScaler: TextScaler.linear(1.2),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignupScreen(),
+                        ),
+                      );
+                    },
                     child: const Text(
                       "Sign up now",
                       style: TextStyle(
