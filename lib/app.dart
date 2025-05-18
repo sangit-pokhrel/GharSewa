@@ -8,9 +8,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Ghar Sewa Test",
+      title: "Ghar Sewa",
       initialRoute: '/',
-      routes: {'/': (context) => const SplashScreen()},
+      routes: {
+        '/': (context) => const SplashScreen()
+        '/login': (context) => const LoginScreen()
+        
+        },
     );
   }
 }
