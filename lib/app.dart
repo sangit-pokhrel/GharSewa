@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ghar_sewa/view/splash_screen_view.dart';
+import 'package:ghar_sewa/view/login_screen.dart';
+import 'package:ghar_sewa/view/splash_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -11,10 +12,9 @@ class MyApp extends StatelessWidget {
       title: "Ghar Sewa",
       initialRoute: '/',
       routes: {
-        '/': (context) => const SplashScreen()
-        '/login': (context) => const LoginScreen()
-        
-        },
+        '/': (context) => const SplashScreen(),
+        '/login': (context) => const LoginScreen(),
+      },
     );
   }
 }

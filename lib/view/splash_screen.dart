@@ -45,30 +45,36 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(
-        0xFF2196F3,
-      ), // Use your gradient or static blue
-      body: Stack(
-        children: [
-          Center(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: Image.asset(
-                'assets/images/gharsewa_logo.png', // Place your logo in assets/images
-                width: 200,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFFE0F2FF), // light near-white blue top-left
+              Color(0xFF2196F3), // solid blue bottom-right
+            ],
+          ),
+        ),
+        child: Stack(
+          children: [
+            Center(
+              child: FadeTransition(
+                opacity: _fadeAnimation,
+                child: Image.asset('assets/logo/splash.png', width: 300),
               ),
             ),
-          ),
-          const Positioned(
-            bottom: 30,
-            left: 0,
-            right: 0,
-            child: LinearProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              backgroundColor: Colors.white24,
+            const Positioned(
+              bottom: 30,
+              left: 0,
+              right: 0,
+              child: LinearProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                backgroundColor: Colors.white24,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
