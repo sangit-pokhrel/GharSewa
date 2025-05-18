@@ -7,18 +7,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white, // ✅ Remove black margins
       bottomNavigationBar: BottomNavBar(currentIndex: 0),
-      appBar: AppBar(
-        title: const Text("Home"),
-        backgroundColor: const Color(0xFF0052CC),
-        actions: [
-          IconButton(icon: const Icon(Icons.notifications), onPressed: () {}),
-        ],
-      ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -28,9 +22,9 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Image.asset(
                       'assets/logo/removed-blacklogo.png',
-                      height: 40,
+                      height: 120,
                     ),
-                    const Icon(Icons.phone, color: Colors.black),
+                    const Icon(Icons.phone, color: Colors.black, size: 30),
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -100,6 +94,9 @@ class HomeScreen extends StatelessWidget {
                         'assets/icons/Multimeter.png',
                       ),
                       _buildServiceCard('Solar', 'assets/icons/Solar.png'),
+                      _buildServiceCard('Solar', 'assets/icons/Solar.png'),
+                      _buildServiceCard('Solar', 'assets/icons/Solar.png'),
+                      _buildServiceCard('Solar', 'assets/icons/Solar.png'),
                     ],
                   ),
                 ),
@@ -113,6 +110,17 @@ class HomeScreen extends StatelessWidget {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
+                      _buildProviderCard(
+                        "Mukeswar Shah",
+                        "Plumber",
+                        "assets/images/mukesh.png",
+                      ),
+                      _buildProviderCard(
+                        "Anuz Dhakal",
+                        "Electrician",
+                        "assets/images/anuz.png",
+                        isGray: true,
+                      ),
                       _buildProviderCard(
                         "Mukeswar Shah",
                         "Plumber",
