@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ghar_sewa/view/login_screen.dart';
 import 'package:ghar_sewa/view/splash_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -10,7 +11,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Ghar Sewa",
       initialRoute: '/',
-      routes: {'/': (context) => const SplashScreen()},
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/login': (context) => const LoginScreen(),
+      },
     );
   }
 }
