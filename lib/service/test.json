@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "message": "User registered successfully",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzZhNGE2MTI0YzlmM2Y1MTQ5ZTJiNiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzQ4NDExNTU4LCJleHAiOjE3NDg0OTc5NTh9.zEDZzxtithsk8BksuUTh67NPfory4J_Ww6GqbZ9xQ6s",
+  "user": {
+    "id": "6836a4a6124c9f3f5149e2b6",
+    "email": "heypsychbebocg339@gmail.com",
+    "role": "User"
+  }
+}

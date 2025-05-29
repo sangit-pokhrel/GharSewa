@@ -1,4 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:motion_toast/motion_toast.dart';
 import 'package:ghar_sewa/view/login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -9,8 +12,105 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final _fullNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _obscureText = true;
   bool _agreeTerms = false;
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _handleSignup() async {
+    setState(() => _isLoading = true);
+
+    final url = Uri.parse('http://10.15.9.57:5000/api/auth/register');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'fullName': _fullNameController.text.trim(),
+          'email': _emailController.text.trim(),
+          'password': _passwordController.text.trim(),
+        }),
+      );
+
+      print('Response Body: ${response.body}');
+      final result = jsonDecode(response.body);
+
+      if ((response.statusCode == 200 || response.statusCode == 201) &&
+          result['success'] == true) {
+        await Future.delayed(const Duration(seconds: 2));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const LoginScreen()),
+        );
+        FocusScope.of(context).unfocus(); // hide keyboard first
+
+        MotionToast(
+          primaryColor: Colors.black87, // background color
+          backgroundType: BackgroundType.solid, // disables blur/gradient
+          icon: null, // removes icon
+          title: const Text(
+            "Success",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+            ),
+          ),
+          description: const Text(
+            "Account created successfully!",
+            style: TextStyle(fontSize: 12, color: Colors.white70),
+          ),
+          width: 200,
+          height: 20,
+          animationType: AnimationType.slideInFromTop,
+          toastAlignment: Alignment.topCenter,
+          animationDuration: const Duration(milliseconds: 400),
+          toastDuration: const Duration(seconds: 2),
+          borderRadius: 8,
+          displayBorder: false, // no outline
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        ).show(context);
+      } else {
+        FocusScope.of(context).unfocus();
+        MotionToast.error(
+          title: const Text("Signup Failed"),
+          description: const Text("Account creation Failed!"),
+          animationType: AnimationType.slideInFromRight,
+          toastAlignment: Alignment.topRight,
+          animationDuration: const Duration(
+            milliseconds: 500,
+          ), // controls slide speed
+          toastDuration: const Duration(seconds: 2),
+          width: 250,
+        ).show(context);
+      }
+    } catch (e) {
+      FocusScope.of(context).unfocus();
+      MotionToast.error(
+        title: const Text("Error Occured"),
+        description: const Text("Something Went Wrong !!!"),
+        animationType: AnimationType.slideInFromRight,
+        animationDuration: const Duration(
+          milliseconds: 500,
+        ), // controls slide speed
+        toastDuration: const Duration(seconds: 2),
+        toastAlignment: Alignment.topRight,
+        width: 250,
+      ).show(context);
+    }
+    setState(() => _isLoading = false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +122,6 @@ class _SignupScreenState extends State<SignupScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   IconButton(
                     icon: const Icon(Icons.arrow_back),
@@ -38,6 +137,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               const SizedBox(height: 25),
               TextField(
+                controller: _fullNameController,
                 decoration: InputDecoration(
                   hintText: "Full name",
                   prefixIcon: const Icon(Icons.person_outline),
@@ -48,6 +148,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               const SizedBox(height: 20),
               TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   hintText: "Enter your email",
                   prefixIcon: const Icon(Icons.email_outlined),
@@ -58,6 +159,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               const SizedBox(height: 20),
               TextField(
+                controller: _passwordController,
                 obscureText: _obscureText,
                 decoration: InputDecoration(
                   hintText: "Enter password",
@@ -111,17 +213,20 @@ class _SignupScreenState extends State<SignupScreen> {
                 width: double.infinity,
                 height: 55,
                 child: ElevatedButton(
-                  onPressed: _agreeTerms ? () {} : null,
+                  onPressed: _agreeTerms && !_isLoading ? _handleSignup : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF0052CC),
+                    backgroundColor: const Color(0xFF0052CC),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
+                  child:
+                      _isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const Text(
+                            "Sign Up",
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
                 ),
               ),
               const SizedBox(height: 15),
@@ -174,7 +279,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        side: BorderSide(color: Colors.grey),
+                        side: const BorderSide(color: Colors.grey),
                       ),
                     ),
                   ),
@@ -192,7 +297,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        side: BorderSide(color: Colors.grey),
+                        side: const BorderSide(color: Colors.grey),
                       ),
                     ),
                   ),
@@ -205,5 +310,3 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 }
-
-// this is a signup code 
