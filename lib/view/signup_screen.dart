@@ -57,7 +57,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
         MotionToast(
           primaryColor: Colors.black87, // background color
-          backgroundType: BackgroundType.solid, // disables blur/gradient
+
           icon: null, // removes icon
           title: const Text(
             "Success",
@@ -78,8 +78,7 @@ class _SignupScreenState extends State<SignupScreen> {
           animationDuration: const Duration(milliseconds: 400),
           toastDuration: const Duration(seconds: 2),
           borderRadius: 8,
-          displayBorder: false, // no outline
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          displayBorder: false,
         ).show(context);
       } else {
         FocusScope.of(context).unfocus();
