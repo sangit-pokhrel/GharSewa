@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ghar_sewa/view/home_screen.dart';
+import 'package:ghar_sewa/view/main_navbar_page.dart';
 import 'package:ghar_sewa/view/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -86,11 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 55,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
+                      MaterialPageRoute(builder: (_) => const MainNavbarPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

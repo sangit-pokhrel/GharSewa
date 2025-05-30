@@ -1,50 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ghar_sewa/view/home_screen.dart';
-import 'package:ghar_sewa/navbar_screens/city_screen.dart';
-import 'package:ghar_sewa/navbar_screens/search_screen.dart';
-import 'package:ghar_sewa/navbar_screens/order_screen.dart';
-import 'package:ghar_sewa/navbar_screens/profile_screen.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
   final Function(int)? onTap;
 
   const BottomNavBar({super.key, required this.currentIndex, this.onTap});
-
-  void _navigateToPage(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const CityScreen()),
-        );
-        break;
-      case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const SearchScreen()),
-        );
-        break;
-      case 3:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const OrderScreen()),
-        );
-        break;
-      case 4:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const ProfileScreen()),
-        );
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +13,7 @@ class BottomNavBar extends StatelessWidget {
       selectedItemColor: const Color(0xFF0052CC),
       unselectedItemColor: Colors.grey,
       type: BottomNavigationBarType.fixed,
-      onTap: (index) {
-        if (onTap != null) {
-          onTap!(index); // update index if managed by parent
-        }
-        _navigateToPage(context, index); // navigate on click
-      },
+      onTap: onTap,
       items: [
         const BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         const BottomNavigationBarItem(
@@ -90,10 +45,10 @@ class BottomNavBar extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: const [
           Icon(Icons.search_rounded, size: 25, color: Colors.white),
-          const SizedBox(height: 4),
-          const Text(
+          SizedBox(height: 4),
+          Text(
             "Search",
             style: TextStyle(
               color: Colors.white,
