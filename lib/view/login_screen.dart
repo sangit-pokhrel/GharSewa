@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ghar_sewa/view/home_screen.dart';
 import 'package:ghar_sewa/view/main_navbar_page.dart';
 import 'package:ghar_sewa/view/signup_screen.dart';
 

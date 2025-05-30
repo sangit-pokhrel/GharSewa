@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ghar_sewa/common/bottom_navbar.dart';
+import 'package:ghar_sewa/home_screens_detail/popular_service_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 60),
-              _buildSectionHeader("Popular Services"),
+              _buildSectionHeader(context, "Popular Services"),
               const SizedBox(height: 10),
               SizedBox(
                 height: 85,
@@ -125,7 +125,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildSectionHeader("Service Providers"),
+              _buildSectionHeader(context, "Service Providers"),
               const SizedBox(height: 10),
               SizedBox(
                 height: 210,
@@ -146,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildSectionHeader("Top Rated Services"),
+              _buildSectionHeader(context, "Top Rated Services"),
               const SizedBox(height: 10),
               SizedBox(
                 height: 120,
@@ -172,13 +172,13 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildSectionHeader("Trending Now"),
+              _buildSectionHeader(context, "Trending Now"),
               const SizedBox(height: 10),
               _buildTrendingBanner("assets/images/Solar.png"),
               const SizedBox(height: 12),
               _buildTrendingBanner("assets/images/Solar.png"),
               const SizedBox(height: 20),
-              _buildSectionHeader("Our Achievements"),
+              _buildSectionHeader(context, "Our Achievements"),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -189,7 +189,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              _buildSectionHeader("About Us"),
+              _buildSectionHeader(context, "About Us"),
               const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.all(14),
@@ -211,7 +211,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(String title) {
+  Widget _buildSectionHeader(BuildContext context, String title) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -219,7 +219,25 @@ class HomeScreen extends StatelessWidget {
           title,
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        const Text("View all", style: TextStyle(color: Color(0xFF0052CC))),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder:
+                    (_) =>
+                        const PopularServicesScreen(), // <-- Your target screen
+              ),
+            );
+          },
+          child: const Text(
+            "View all",
+            style: TextStyle(
+              color: Color(0xFF0052CC),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
       ],
     );
   }
