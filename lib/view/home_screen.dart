@@ -44,8 +44,9 @@ class HomeScreen extends StatelessWidget {
                               Text(
                                 "Get 30% off",
                                 style: TextStyle(
+                                  fontFamily: 'Urbanist ExtraBold',
                                   color: Colors.white,
-                                  fontSize: 24,
+                                  fontSize: 28,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
