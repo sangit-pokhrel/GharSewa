@@ -1,16 +1,20 @@
-# ghar_sewa
+# Ghar Sewa - Home Service Booking App
 
-A new Flutter project.
+**Ghar Sewa** is a Flutter-based mobile application that helps users book home service providers like plumbers, electricians, and solar technicians. The app features a clean, modern UI and displays service categories, provider details, and promotional offers.
 
-## Getting Started
+## 🏠 Home Screen Features
 
-This project is a starting point for a Flutter application.
+- 🔵 Clean top header with logo and call icon
+- 🟦 Promotional banner offering discounts
+- 🔍 Search bar with filter icon
+- 🛠 Popular service categories displayed horizontally
+- 👨‍🔧 Service providers with names, roles, ratings, and image thumbnails
+- ⚡ Smooth horizontal scrolling lists for both services and providers
+- 📱 Bottom navigation bar with `Home`, `City`, `Order`, and `Profile`
 
-A few resources to get you started if this is your first Flutter project:
+## 📸 Preview
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![App Screenshot](assets/screenshots/home_screen.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📂 Project Structure
+
