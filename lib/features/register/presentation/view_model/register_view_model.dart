@@ -1,7 +1,8 @@
 
 
 
-class RegisterViewModel extends Cubit<void> {
-    RegisterViewModel() : super(null);
-    
+class RegisterViewModel extends Bloc<RegisterEvent, RegisterState> {
+    RegisterViewModel() : super(RegisterState.initial());
+
+
 }
