@@ -3,6 +3,7 @@ import 'package:ghar_sewa/app.dart';
 import 'package:ghar_sewa/core/network/hive_service.dart';
 
 void main() async {
+  await HiveService().init();
   runApp(
     MyApp(), // Body
   );
