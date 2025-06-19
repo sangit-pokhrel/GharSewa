@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ghar_sewa/features/splash/presentation/view/splash_screen.dart';
 import 'package:ghar_sewa/screens/about_us.dart';
 import 'package:ghar_sewa/screens/acheivements_screen.dart';
 import 'package:ghar_sewa/screens/popular_service_screen.dart';
@@ -8,7 +9,7 @@ import 'package:ghar_sewa/screens/trending_service_screen.dart';
 import 'package:ghar_sewa/theme/app_theme_font.dart';
 import 'package:ghar_sewa/view/login_screen.dart';
 import 'package:ghar_sewa/view/main_navbar_page.dart';
-import 'package:ghar_sewa/view/splash_screen.dart';
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       theme: getApplicationTheme(),
       routes: {
-        '/': (context) => const SplashScreen(),
+        '/': (context) => const SplashScreenView(),
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const MainNavbarPage(),
         '/popularservices': (context) => const PopularServicesScreen(),

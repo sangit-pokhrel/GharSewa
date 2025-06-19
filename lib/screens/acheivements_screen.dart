@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AcheivementsScreen extends StatelessWidget {
-  const AcheivementsScreen({Key? key}) : super(key: key);
+  const AcheivementsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

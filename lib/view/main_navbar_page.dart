@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ghar_sewa/common/bottom_navbar.dart';
+import 'package:ghar_sewa/core/common/bottom_navbar/bottom_navbar.dart';
 import 'package:ghar_sewa/navbar_screens/city_screen.dart';
 import 'package:ghar_sewa/navbar_screens/search_screen.dart';
 import 'package:ghar_sewa/navbar_screens/order_screen.dart';

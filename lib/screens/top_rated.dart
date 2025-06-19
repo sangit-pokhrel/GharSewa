@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TopRatedServiceScreen extends StatelessWidget {
-  const TopRatedServiceScreen({Key? key}) : super(key: key);
+  const TopRatedServiceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

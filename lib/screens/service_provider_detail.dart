@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ghar_sewa/screens/service_provider_viewall.dart';
 
 class ServiceProviderDetail extends StatelessWidget {
-  const ServiceProviderDetail({Key? key}) : super(key: key);
+  const ServiceProviderDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -330,12 +330,11 @@ class ServiceProviderDetail extends StatelessWidget {
                         MaterialPageRoute(
                           builder:
                               (_) => ServiceProviderViewall(
-                                title: section['title'],
                                 providers: List<Map<String, String>>.from(
                                   section['items'],
                                 ),
                               ),
-                        ),
+                        )
                       );
                     },
                     child: const Text(
