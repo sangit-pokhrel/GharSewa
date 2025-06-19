@@ -11,7 +11,15 @@ class HiveService {
 
     Hive.registerAdapter(RegisterHiveModelAdapter());
 
-    await Hive.openBox(HiveTableConstant.registerBox);
+    //queries 
+    Future<void> addRegister(RegisterEntity register) async {
+      var box = await Hive.openBox(HiveTableConstant.registerBox);
+      await box.add(register);
+
+    }
+
+
+
   }
 }
 
