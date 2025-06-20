@@ -33,27 +33,40 @@ class HiveService {
   //   final box = await Hive.openBox<LoginHiveModel>(
   //     HiveTableConstant.loginBox,
   //   );
-    
+
   //   // Get all stored login records
   //   final allLogins = box.values.toList();
-    
+
   //   // Check if any stored login matches the provided email and password
-  //   return allLogins.any((storedLogin) => 
-  //     storedLogin.email == login.email && 
+  //   return allLogins.any((storedLogin) =>
+  //     storedLogin.email == login.email &&
   //     storedLogin.password == login.password
   //   );
   // }
 
-
   Future<bool> checkLogin(LoginHiveModel login) async {
-  final box = await Hive.openBox<LoginHiveModel>(
-    HiveTableConstant.loginBox,
-  );
+    final box = await Hive.openBox<RegisterHiveModel>(
+      HiveTableConstant.registerBox,
+    );
 
-  return box.values.any((stored) =>
-    stored.email == login.email &&
-    stored.password == login.password
-  );
-}
+    return box.values.any(
+      (stored) =>
+          stored.email == login.email && stored.password == login.password,
+    );
+  }
 
+  Future<void> saveLoggedInUserEmail(String email) async {
+    final box = await Hive.openBox('authBox');
+    await box.put('loggedInEmail', email);
+  }
+
+  Future<String?> getLoggedInUserEmail() async {
+    final box = await Hive.openBox('authBox');
+    return box.get('loggedInEmail');
+  }
+
+  Future<void> logoutUser() async {
+    final box = await Hive.openBox('authBox');
+    await box.delete('loggedInEmail');
+  }
 }

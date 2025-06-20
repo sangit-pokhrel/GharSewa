@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ghar_sewa/features/splash/domain/use_case/next_pate_navigate_use_case.dart';
 
 class SplashViewModel extends ChangeNotifier {

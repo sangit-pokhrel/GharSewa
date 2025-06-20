@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ghar_sewa/features/login/presentation/view/login_view.dart';
+import 'package:ghar_sewa/features/login/presentation/view_model/login_view_model.dart';
 import 'package:ghar_sewa/features/register/presentation/view_model/register_view_model.dart';
 import 'package:ghar_sewa/features/splash/presentation/view/splash_screen.dart';
 import 'package:ghar_sewa/screens/about_us.dart';
@@ -26,7 +28,6 @@ class MyApp extends StatelessWidget {
       theme: getApplicationTheme(),
       routes: {
         '/': (context) => const SplashScreenView(),
-        '/login': (context) => const LoginScreen(),
         '/home': (context) => const MainNavbarPage(),
         '/popularservices': (context) => const PopularServicesScreen(),
         '/serviceproviders': (context) => const ServiceProviderDetail(),
@@ -39,6 +40,12 @@ class MyApp extends StatelessWidget {
             (context) => BlocProvider.value(
               value: serviceLocator<RegisterViewModel>(),
               child: const RegisterView(),
+            ),
+        '/login':
+            (context) => BlocProvider(
+              create:
+                  (_) => LoginViewModel(checkLoginUsecase: serviceLocator()),
+              child: const LoginView(),
             ),
       },
     );
