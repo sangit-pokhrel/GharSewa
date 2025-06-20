@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ghar_sewa/features/register/presentation/view/register_view.dart';
 import 'package:ghar_sewa/view/main_navbar_page.dart';
 import 'package:ghar_sewa/view/signup_screen.dart';
 
@@ -120,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SignupScreen(),
+                          builder: (context) => const RegisterView(),
                         ),
                       );
                     },

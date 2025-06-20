@@ -4,22 +4,19 @@ import 'package:ghar_sewa/features/register/data/data_source/register_datasource
 import 'package:ghar_sewa/features/register/data/model/register_hive_model.dart';
 import 'package:ghar_sewa/features/register/domain/entity/register_entity.dart';
 
-
-
 class RegisterLocalDataSource implements IRegisterLocalDataSource {
-
   final HiveService _hiveService;
   //dependency injection
-  RegisterLocalDataSource({required HiveService hiveService}) : _hiveService = hiveService;
+  RegisterLocalDataSource({required HiveService hiveService})
+    : _hiveService = hiveService;
 
   @override
   Future<void> addRegister(RegisterEntity register) async {
     try {
-        final registerHiveModel = RegisterHiveModel.fromEntity(register);   
-        await _hiveService.addRegister(registerHiveModel);
+      final registerHiveModel = RegisterHiveModel.fromEntity(register);
+      await _hiveService.addRegister(registerHiveModel);
     } catch (e) {
-        throw LocalDatabaseFailure(message: e.toString());
+      throw LocalDatabaseFailure(message: e.toString());
     }
   }
 }
-      

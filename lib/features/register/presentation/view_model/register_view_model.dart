@@ -12,7 +12,8 @@ class RegisterViewModel extends Bloc<RegisterEvent, RegisterState> {
   //     on<AddRegisterEvent>(_onAddRegister);
   // };
 
-  RegisterViewModel(this.addRegisterUsecase) : super(RegisterState.initial()) {
+  RegisterViewModel({required this.addRegisterUsecase})
+    : super(RegisterState.initial()) {
     on<AddRegisterEvent>(_onAddRegister);
   }
 
@@ -21,7 +22,16 @@ class RegisterViewModel extends Bloc<RegisterEvent, RegisterState> {
     Emitter<RegisterState> emit,
   ) async {
     emit(state.copyWith(isLoading: true));
-    final result = await addRegisterUsecase.call(event.params);
+    final result = await addRegisterUsecase(
+      AddRegisterParams(
+        name: event.name,
+        email: event.email,
+        password: event.password,
+        phone: event.phone,
+        country: event.country,
+        province: event.province,
+      ),
+    );
     result.fold(
       (failure) {
         emit(
