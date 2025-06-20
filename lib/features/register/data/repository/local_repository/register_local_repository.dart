@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ghar_sewa/core/error/failure.dart';
-import 'package:ghar_sewa/features/register/data/data_source/local_datasource/register_local_datasource.dart';
+import 'package:ghar_sewa/features/register/data/data_source/register_datasource.dart';
 import 'package:ghar_sewa/features/register/domain/entity/register_entity.dart';
 import 'package:ghar_sewa/features/register/domain/repository/register_repository.dart';
 

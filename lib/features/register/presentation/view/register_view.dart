@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ghar_sewa/features/register/presentation/view_model/register_bloc.dart';
 import 'package:ghar_sewa/features/register/presentation/view_model/register_event.dart';
 import 'package:ghar_sewa/view/login_screen.dart';
 
@@ -21,7 +19,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final _provinceController = TextEditingController();
   bool _obscureText = true;
   bool _agreeTerms = false;
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   @override
   void dispose() {

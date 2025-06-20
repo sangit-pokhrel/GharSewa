@@ -1,5 +1,13 @@
 
 
+import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
+import 'package:ghar_sewa/core/error/failure.dart';
+import 'package:ghar_sewa/features/register/domain/entity/register_entity.dart';
+import 'package:ghar_sewa/features/register/domain/repository/register_repository.dart';
+
+import '../../../../app/use_case/usecase.dart';
+
 class AddRegisterParams {
     final String name;
     final String email;
@@ -16,11 +24,14 @@ class AddRegisterParams {
         required this.country,
         required this.province,
     });
-class AddRegisterUsecase implements UsecaseWithParams<void, AddRegisterParams> {
 
-    final IRegisterRepository _iregisterRepository;
+}
 
-    AddRegisterUsecase({required IRegisterRepository registerRepository}) : _iregisterRepository = registerRepository;
+  class AddRegisterUsecase implements UsecaseWithParams<void, AddRegisterParams> {
+
+    final IRegisterRepository iregisterRepository;
+
+    AddRegisterUsecase({required IRegisterRepository registerRepository}) : iregisterRepository = registerRepository;
 
     @override
     Future<Either<Failure, void>> call(AddRegisterParams params) async {
@@ -31,9 +42,10 @@ class AddRegisterUsecase implements UsecaseWithParams<void, AddRegisterParams> {
             password: params.password,
             phone: params.phone,
             country: params.country,
-            province: params.province,
+            province: params.province, 
+            id: '',
         );
-        return await _iregisterRepository.addRegister(register);
+        return await iregisterRepository.addRegister(register);
     }
 
 

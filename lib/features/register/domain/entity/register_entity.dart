@@ -6,8 +6,8 @@ class RegisterEntity extends Equatable {
   final String email;
   final String password;
   final String phone;
-  final String country,
-  final String province,
+  final String country;
+  final String province;
 
   const RegisterEntity({
     required this.id,
@@ -21,5 +21,4 @@ class RegisterEntity extends Equatable {
 
   @override
   List<Object?> get props => [name, email, password, phone, country, province];
-  
-} 
+}

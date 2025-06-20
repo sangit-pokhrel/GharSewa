@@ -1,5 +1,7 @@
 
 
+import 'package:equatable/equatable.dart';
+
 class RegisterState extends Equatable {
   final bool isLoading;
   final bool isSuccess;
