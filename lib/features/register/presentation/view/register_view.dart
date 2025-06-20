@@ -12,6 +12,8 @@ class RegisterView extends StatefulWidget {
   State<RegisterView> createState() => _RegisterViewState();
 }
 
+
+
 class _RegisterViewState extends State<RegisterView> {
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();

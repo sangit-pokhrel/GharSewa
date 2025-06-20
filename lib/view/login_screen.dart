@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ghar_sewa/features/register/presentation/view/register_view.dart';
 import 'package:ghar_sewa/view/main_navbar_page.dart';
-import 'package:ghar_sewa/view/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,7 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     icon: const Icon(Icons.arrow_back),
                     onPressed: () => Navigator.pop(context),
                   ),
-
                   Image.asset('assets/logo/removed-blacklogo.png', height: 120),
                 ],
               ),
@@ -93,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF0052CC),
+                    backgroundColor: const Color(0xFF0052CC),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -118,12 +115,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RegisterView(),
-                        ),
-                      );
+                      // ✅ This now navigates to register screen with proper BlocProvider
+                      Navigator.pushNamed(context, '/register');
                     },
                     child: const Text(
                       "Sign up now",
