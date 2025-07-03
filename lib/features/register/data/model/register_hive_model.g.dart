@@ -17,7 +17,6 @@ class RegisterHiveModelAdapter extends TypeAdapter<RegisterHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return RegisterHiveModel(
-      id: fields[0] as String?,
       name: fields[1] as String,
       email: fields[2] as String,
       password: fields[3] as String,
@@ -30,9 +29,7 @@ class RegisterHiveModelAdapter extends TypeAdapter<RegisterHiveModel> {
   @override
   void write(BinaryWriter writer, RegisterHiveModel obj) {
     writer
-      ..writeByte(7)
-      ..writeByte(0)
-      ..write(obj.id)
+      ..writeByte(6)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)

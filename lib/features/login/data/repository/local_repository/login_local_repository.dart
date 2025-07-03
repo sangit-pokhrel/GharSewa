@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ghar_sewa/core/error/failure.dart';
 import 'package:ghar_sewa/features/login/data/data_source/local_datasource/login_local_datasource.dart';
+import 'package:ghar_sewa/features/login/data/model/login_api_model.dart';
 import 'package:ghar_sewa/features/login/domain/entity/login_entity.dart';
 import 'package:ghar_sewa/features/login/domain/repository/login_repository.dart';
 import 'package:ghar_sewa/features/login/data/model/login_hive_model.dart';
@@ -19,5 +20,11 @@ class LoginLocalRepository implements ILoginRepository {
     } catch (e) {
       return Left(LocalDatabaseFailure(message: e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failure, String>> login(LoginApiModel loginData) {
+    // TODO: implement login
+    throw UnimplementedError();
   }
 }

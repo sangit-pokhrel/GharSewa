@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
@@ -10,8 +9,6 @@ part 'register_hive_model.g.dart';
 
 @HiveType(typeId: HiveTableConstant.registerTableId)
 class RegisterHiveModel extends Equatable {
-  @HiveField(0)
-  final String id;
   @HiveField(1)
   final String name;
   @HiveField(2)
@@ -25,24 +22,27 @@ class RegisterHiveModel extends Equatable {
   @HiveField(6)
   final String province;
 
-  RegisterHiveModel({
-    String? id,
+  const RegisterHiveModel({
     required this.name,
     required this.email,
     required this.password,
     required this.phone,
     required this.country,
     required this.province,
-  }) : id = id ?? const Uuid().v4();
+  });
 
-//initial data
-const RegisterHiveModel.initial() : id = '', name = '', email = '', password = '', phone = '', country = '', province = '';
+  //initial data
+  const RegisterHiveModel.initial()
+    : name = '',
+      email = '',
+      password = '',
+      phone = '',
+      country = '',
+      province = '';
 
-
-//conversion code like to entity and from entity
+  //conversion code like to entity and from entity
   RegisterEntity toEntity() {
     return RegisterEntity(
-      id: id,
       name: name,
       email: email,
       password: password,
@@ -54,7 +54,6 @@ const RegisterHiveModel.initial() : id = '', name = '', email = '', password = '
 
   factory RegisterHiveModel.fromEntity(RegisterEntity register) {
     return RegisterHiveModel(
-      id: register.id,
       name: register.name,
       email: register.email,
       password: register.password,
@@ -64,20 +63,18 @@ const RegisterHiveModel.initial() : id = '', name = '', email = '', password = '
     );
   }
 
-    // to entity list
+  // to entity list
   static List<RegisterEntity> toEntityList(List<RegisterHiveModel> models) {
     return models.map((model) => model.toEntity()).toList();
   }
 
-    // from entity list
+  // from entity list
   static List<RegisterHiveModel> fromEntityList(List<RegisterEntity> entities) {
-    return entities.map((entity) => RegisterHiveModel.fromEntity(entity)).toList();
+    return entities
+        .map((entity) => RegisterHiveModel.fromEntity(entity))
+        .toList();
   }
 
-
   @override
-  List<Object?> get props => [id, name, email, password, phone, country, province];
-
-  
+  List<Object?> get props => [name, email, password, phone, country, province];
 }
-

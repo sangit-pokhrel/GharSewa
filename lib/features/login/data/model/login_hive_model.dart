@@ -68,24 +68,21 @@ part 'login_hive_model.g.dart';
 
 @HiveType(typeId: HiveTableConstant.loginTableId)
 class LoginHiveModel extends Equatable {
-  @HiveField(0)
-  final String id;
+  
   @HiveField(1)
   final String email;
   @HiveField(2)
   final String password;
 
-  LoginHiveModel({String? id, required this.email, required this.password})
-    : id = id ?? const Uuid().v4();
+  const LoginHiveModel({required this.email, required this.password});
 
   factory LoginHiveModel.fromEntity(LoginEntity entity) {
     return LoginHiveModel(
-      id: entity.id,
       email: entity.email,
       password: entity.password,
     );
   }
 
   @override
-  List<Object?> get props => [id, email, password];
+  List<Object?> get props => [email, password];
 }

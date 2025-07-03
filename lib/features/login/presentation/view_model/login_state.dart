@@ -5,6 +5,7 @@ class LoginState extends Equatable {
   final bool isSuccess;
   final bool isFailure;
   final String? errorMessage;
+  
   final bool? loginMatched;
 
   const LoginState({

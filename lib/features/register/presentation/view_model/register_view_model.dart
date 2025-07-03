@@ -1,19 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ghar_sewa/features/register/domain/use_case/add_register_usecase.dart';
-import 'package:ghar_sewa/features/register/presentation/view_model/register_event.dart';
-import 'package:ghar_sewa/features/register/presentation/view_model/register_state.dart';
+import 'package:ghar_sewa/features/register/domain/use_case/register_usecase.dart';
+import 'package:ghar_sewa/features/register/domain/entity/register_entity.dart';
+import 'register_event.dart';
+import 'register_state.dart';
 
 class RegisterViewModel extends Bloc<RegisterEvent, RegisterState> {
-  final AddRegisterUsecase addRegisterUsecase;
+  final RegisterUseCase registerUseCase;
 
-  //   RegisterViewModel(this._addRegisterUsecase, {
-  //     required this.addRegisterUsecase,
-  // }) : super(RegisterState.initial()){
-  //     on<AddRegisterEvent>(_onAddRegister);
-  // };
-
-  RegisterViewModel({required this.addRegisterUsecase})
-    : super(RegisterState.initial()) {
+  RegisterViewModel({required this.registerUseCase})
+    : super(const RegisterState.initial()) {
     on<AddRegisterEvent>(_onAddRegister);
   }
 
@@ -21,17 +16,19 @@ class RegisterViewModel extends Bloc<RegisterEvent, RegisterState> {
     AddRegisterEvent event,
     Emitter<RegisterState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
-    final result = await addRegisterUsecase(
-      AddRegisterParams(
-        name: event.name,
-        email: event.email,
-        password: event.password,
-        phone: event.phone,
-        country: event.country,
-        province: event.province,
-      ),
+    emit(state.copyWith(isLoading: true, isFailure: false, isSuccess: false));
+
+    final registerEntity = RegisterEntity(
+      name: event.name,
+      email: event.email,
+      password: event.password,
+      phone: event.phone,
+      country: event.country,
+      province: event.province,
     );
+
+    final result = await registerUseCase(registerEntity);
+
     result.fold(
       (failure) {
         emit(
@@ -42,8 +39,10 @@ class RegisterViewModel extends Bloc<RegisterEvent, RegisterState> {
           ),
         );
       },
-      (success) {
-        emit(state.copyWith(isLoading: false, isSuccess: true));
+      (_) {
+        emit(
+          state.copyWith(isLoading: false, isSuccess: true, isFailure: false),
+        );
       },
     );
   }

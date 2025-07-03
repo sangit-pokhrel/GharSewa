@@ -41,9 +41,8 @@ class MyApp extends StatelessWidget {
               child: const RegisterView(),
             ),
         '/login':
-            (context) => BlocProvider(
-              create:
-                  (_) => LoginViewModel(checkLoginUsecase: serviceLocator()),
+            (context) => BlocProvider.value(
+              value: serviceLocator<LoginViewModel>(),
               child: const LoginView(),
             ),
       },

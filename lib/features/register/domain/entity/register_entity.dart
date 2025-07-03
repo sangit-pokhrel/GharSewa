@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class RegisterEntity extends Equatable {
-  final String id;
   final String name;
   final String email;
   final String password;
@@ -10,7 +9,6 @@ class RegisterEntity extends Equatable {
   final String province;
 
   const RegisterEntity({
-    required this.id,
     required this.name,
     required this.email,
     required this.password,

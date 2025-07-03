@@ -17,7 +17,6 @@ class LoginHiveModelAdapter extends TypeAdapter<LoginHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return LoginHiveModel(
-      id: fields[0] as String?,
       email: fields[1] as String,
       password: fields[2] as String,
     );
@@ -26,9 +25,7 @@ class LoginHiveModelAdapter extends TypeAdapter<LoginHiveModel> {
   @override
   void write(BinaryWriter writer, LoginHiveModel obj) {
     writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.id)
+      ..writeByte(2)
       ..writeByte(1)
       ..write(obj.email)
       ..writeByte(2)

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:ghar_sewa/core/error/failure.dart';
 import 'package:ghar_sewa/features/register/data/data_source/local_datasource/register_local_datasource.dart';
@@ -19,5 +21,17 @@ class RegisterLocalRepository implements IRegisterRepository {
     } catch (e) {
       return Left(LocalDatabaseFailure(message: e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failure, void>> registerUser(RegisterEntity user) {
+    // TODO: implement registerUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, String>> uploadProfilePicture(File file) {
+    // TODO: implement uploadProfilePicture
+    throw UnimplementedError();
   }
 }
