@@ -11,7 +11,6 @@ import 'package:ghar_sewa/screens/service_provider_detail.dart';
 import 'package:ghar_sewa/screens/top_rated.dart';
 import 'package:ghar_sewa/screens/trending_service_screen.dart';
 import 'package:ghar_sewa/theme/app_theme_font.dart';
-import 'package:ghar_sewa/view/login_screen.dart';
 import 'package:ghar_sewa/view/main_navbar_page.dart';
 import 'package:ghar_sewa/features/register/presentation/view/register_view.dart';
 import 'package:ghar_sewa/app/service_locator/service_locator.dart'; // 👈 to access serviceLocator

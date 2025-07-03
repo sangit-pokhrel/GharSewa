@@ -8,7 +8,7 @@ class RegisterState extends Equatable {
   final bool isFailure;
   final String? errorMessage;
 
-  RegisterState({
+  const RegisterState({
     required this.isLoading,
     required this.isSuccess,
     required this.isFailure,
@@ -16,7 +16,7 @@ class RegisterState extends Equatable {
   });
 
   //initial constructor
-  RegisterState.initial() : isLoading = false, isSuccess = false, isFailure = false, errorMessage = null;
+  const RegisterState.initial() : isLoading = false, isSuccess = false, isFailure = false, errorMessage = null;
 
   //copy State
   RegisterState copyWith({

@@ -12,8 +12,6 @@ class RegisterView extends StatefulWidget {
   State<RegisterView> createState() => _RegisterViewState();
 }
 
-
-
 class _RegisterViewState extends State<RegisterView> {
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -45,7 +43,7 @@ class _RegisterViewState extends State<RegisterView> {
 
     final event = AddRegisterEvent(
       name: _fullNameController.text.trim(),
-      email: _emailController.text.trim(), 
+      email: _emailController.text.trim(),
       password: _passwordController.text.trim(),
       phone: _phoneController.text.trim(),
       country: _countryController.text.trim(),
@@ -64,7 +62,7 @@ class _RegisterViewState extends State<RegisterView> {
             _isLoading = true;
           });
         }
-        
+
         if (state.isSuccess) {
           setState(() {
             _isLoading = false;
@@ -90,7 +88,10 @@ class _RegisterViewState extends State<RegisterView> {
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 20.0,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -101,7 +102,10 @@ class _RegisterViewState extends State<RegisterView> {
                       onPressed: () => Navigator.pop(context),
                     ),
                     const SizedBox(width: 8),
-                    Image.asset('assets/logo/removed-blacklogo.png', height: 120),
+                    Image.asset(
+                      'assets/logo/removed-blacklogo.png',
+                      height: 120,
+                    ),
                   ],
                 ),
                 const Text(
@@ -219,19 +223,26 @@ class _RegisterViewState extends State<RegisterView> {
                   width: double.infinity,
                   height: 55,
                   child: ElevatedButton(
-                    onPressed: _agreeTerms && !_isLoading ? _handleSignup : null,
+                    onPressed:
+                        _agreeTerms && !_isLoading ? _handleSignup : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0052CC),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: _isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
-                            "Sign Up",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
+                    child:
+                        _isLoading
+                            ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                            : const Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
+                            ),
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -277,7 +288,10 @@ class _RegisterViewState extends State<RegisterView> {
                     Expanded(
                       child: OutlinedButton.icon(
                         onPressed: () {},
-                        icon: Image.asset('assets/images/google.png', height: 28),
+                        icon: Image.asset(
+                          'assets/images/google.png',
+                          height: 28,
+                        ),
                         label: const Text(
                           "Google",
                           style: TextStyle(fontSize: 16, color: Colors.black),

@@ -15,7 +15,7 @@ class LoginState extends Equatable {
     this.loginMatched,
   });
 
-  LoginState.initial()
+  const LoginState.initial()
     : isLoading = false,
       isSuccess = false,
       isFailure = false,
