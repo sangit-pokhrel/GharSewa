@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ghar_sewa/core/common/bottom_navbar/bottom_navbar.dart';
-import 'package:ghar_sewa/navbar_screens/city_screen.dart';
-import 'package:ghar_sewa/navbar_screens/search_screen.dart';
-import 'package:ghar_sewa/navbar_screens/order_screen.dart';
-import 'package:ghar_sewa/navbar_screens/profile_screen.dart';
-import 'package:ghar_sewa/view/home_screen.dart';
+import 'package:ghar_sewa/features/home/presentation/navbar_screens/city_screen.dart';
+import 'package:ghar_sewa/features/home/presentation/navbar_screens/search_screen.dart';
+import 'package:ghar_sewa/features/home/presentation/navbar_screens/order_screen.dart';
+import 'package:ghar_sewa/features/home/presentation/navbar_screens/profile_screen.dart';
+import 'package:ghar_sewa/features/home/presentation/view/home_screen.dart';
 
 class MainNavbarPage extends StatefulWidget {
   const MainNavbarPage({super.key});

@@ -60,7 +60,6 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-import 'package:uuid/uuid.dart';
 import 'package:ghar_sewa/app/constant/hive/hive_table_constant.dart';
 import 'package:ghar_sewa/features/login/domain/entity/login_entity.dart';
 

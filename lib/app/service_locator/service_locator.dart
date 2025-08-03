@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import 'package:ghar_sewa/core/network/api_service.dart';
 import 'package:ghar_sewa/core/network/hive_service.dart';
-import 'package:ghar_sewa/features/login/data/data_source/remote_datasource/login_remote_datasource.dart';
-import 'package:ghar_sewa/features/login/data/repository/remote_repository/login_remote_repository.dart';
-import 'package:ghar_sewa/features/login/domain/repository/login_repository.dart';
-import 'package:ghar_sewa/features/login/domain/use_case/login_usecase.dart';
 
 // Register
 import 'package:ghar_sewa/features/register/data/data_source/remote_datasource/register_remote_datasource.dart';
@@ -15,6 +13,10 @@ import 'package:ghar_sewa/features/register/domain/use_case/register_usecase.dar
 import 'package:ghar_sewa/features/register/presentation/view_model/register_view_model.dart';
 
 // Login
+import 'package:ghar_sewa/features/login/data/data_source/remote_datasource/login_remote_datasource.dart';
+import 'package:ghar_sewa/features/login/data/repository/remote_repository/login_remote_repository.dart';
+import 'package:ghar_sewa/features/login/domain/repository/login_repository.dart';
+import 'package:ghar_sewa/features/login/domain/use_case/login_usecase.dart';
 import 'package:ghar_sewa/features/login/data/data_source/local_datasource/login_local_datasource.dart';
 import 'package:ghar_sewa/features/login/data/repository/local_repository/login_local_repository.dart';
 import 'package:ghar_sewa/features/login/domain/use_case/check_login_usecase.dart';
@@ -25,6 +27,7 @@ final serviceLocator = GetIt.instance;
 Future<void> initDependencies() async {
   await _initHiveService();
   await _initApiService();
+  await _initStorage();
   await _initRegisterModule();
   await _initLoginModule();
 }
@@ -34,11 +37,20 @@ Future<void> _initHiveService() async {
 }
 
 Future<void> _initApiService() async {
-  serviceLocator.registerLazySingleton(() => ApiService(Dio()));
+  // ✅ Register Dio globally
+  final dio = Dio();
+  serviceLocator.registerLazySingleton<Dio>(() => dio);
+
+  // ✅ Register ApiService that depends on Dio
+  serviceLocator.registerLazySingleton(() => ApiService(dio));
+}
+
+Future<void> _initStorage() async {
+  // ✅ Secure storage for login/session
+  serviceLocator.registerLazySingleton(() => const FlutterSecureStorage());
 }
 
 Future<void> _initRegisterModule() async {
-  // Register the remote data source
   serviceLocator.registerFactory(
     () => RegisterRemoteDataSource(
       apiService: serviceLocator<ApiService>(),
@@ -46,26 +58,23 @@ Future<void> _initRegisterModule() async {
     ),
   );
 
-  // Register the repository
   serviceLocator.registerFactory<IRegisterRepository>(
     () => RegisterRemoteRepository(
       registerRemoteDataSource: serviceLocator<RegisterRemoteDataSource>(),
     ),
   );
 
-  // ✅ Register the usecase
   serviceLocator.registerFactory<RegisterUseCase>(
     () => RegisterUseCase(serviceLocator<IRegisterRepository>()),
   );
 
-  // ✅ Register the ViewModel
-  serviceLocator.registerLazySingleton(
-    () => RegisterViewModel(registerUseCase: serviceLocator<RegisterUseCase>()),
+  serviceLocator.registerFactory(
+    () => RegisterViewModel(dio: serviceLocator<Dio>()),
   );
 }
 
 Future<void> _initLoginModule() async {
-  // Local Login (for checkLogin)
+  // Local login (Hive)
   serviceLocator.registerFactory(
     () => LoginLocalDataSource(hiveService: serviceLocator<HiveService>()),
   );
@@ -80,7 +89,7 @@ Future<void> _initLoginModule() async {
     ),
   );
 
-  // ✅ Remote Login (for real API login)
+  // Remote login
   serviceLocator.registerFactory(
     () => LoginRemoteDataSource(apiService: serviceLocator<ApiService>()),
   );
@@ -93,11 +102,11 @@ Future<void> _initLoginModule() async {
     () => LoginUseCase(serviceLocator<ILoginRepository>()),
   );
 
-  // ✅ ViewModel
+  // ✅ Login ViewModel using Dio + SecureStorage
   serviceLocator.registerLazySingleton(
     () => LoginViewModel(
-      checkLoginUsecase: serviceLocator<CheckLoginUsecase>(),
-      loginUseCase: serviceLocator<LoginUseCase>(),
+      dio: serviceLocator<Dio>(),
+      secureStorage: serviceLocator<FlutterSecureStorage>(),
     ),
   );
 }

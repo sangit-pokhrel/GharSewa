@@ -1,39 +1,77 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ghar_sewa/features/login/domain/use_case/login_usecase.dart';
-import 'package:ghar_sewa/features/login/data/model/login_api_model.dart';
-import 'package:ghar_sewa/features/login/presentation/view_model/login_event.dart';
-import 'package:ghar_sewa/features/login/presentation/view_model/login_state.dart';
+import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'login_event.dart';
+import 'login_state.dart';
 
 class LoginViewModel extends Bloc<LoginEvent, LoginState> {
-  final LoginUseCase loginUseCase;
+  final Dio dio;
+  final FlutterSecureStorage secureStorage;
 
-  LoginViewModel({required this.loginUseCase, required Object checkLoginUsecase}) : super(LoginState.initial()) {
+  LoginViewModel({
+    required this.dio,
+    required this.secureStorage,
+  }) : super(const LoginState.initial()) {
     on<CheckLoginEvent>(_onLogin);
   }
 
   Future<void> _onLogin(CheckLoginEvent event, Emitter<LoginState> emit) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, isFailure: false, isSuccess: false));
+    print('🔐 Sending login credentials: ${event.email}, ${event.password}');
 
-    final result = await loginUseCase(
-      LoginApiModel(email: event.email, password: event.password),
-    );
+    try {
+      final response = await dio.post(
+        'http://192.168.1.66:3000/api/auth/login',
+        data: {
+          'email': event.email,
+          'password': event.password,
+        },
+        options: Options(headers: {'Content-Type': 'application/json'}),
+      );
 
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          isLoading: false,
-          isFailure: true,
-          errorMessage: failure.message,
-        ),
-      ),
-      (token) => emit(
-        state.copyWith(
+      final result = response.data;
+      print('📥 Response from server: $result');
+
+      if (result['success'] == true &&
+          result['token'] != null &&
+          result['user'] != null) {
+        final token = result['token'];
+        final user = result['user'];
+
+        // ✅ Save all fields to secure storage
+        await secureStorage.write(key: 'token', value: token);
+        await secureStorage.write(key: 'email', value: user['email']);
+        await secureStorage.write(key: 'userId', value: user['id']);
+        await secureStorage.write(key: 'role', value: user['role']);
+
+        // 🔍 Log secure storage contents
+        final allStored = await secureStorage.readAll();
+        print("🧾 Secure Storage Contents After Login:");
+        allStored.forEach((key, value) => print("  $key: $value"));
+
+        emit(state.copyWith(
           isLoading: false,
           isSuccess: true,
+          isFailure: false,
           loginMatched: true,
-          // token: token, // Optional: if you want to store token
-        ),
-      ),
-    );
+        ));
+      } else {
+        print('❌ Login failed: success=false or missing token/user');
+        emit(state.copyWith(
+          isLoading: false,
+          isSuccess: true,
+          isFailure: false,
+          loginMatched: false,
+        ));
+      }
+    } catch (e) {
+      print('❗ Login error: $e');
+      emit(state.copyWith(
+        isLoading: false,
+        isFailure: true,
+        isSuccess: false,
+        errorMessage: 'Login failed. Please check your credentials.',
+      ));
+    }
   }
 }

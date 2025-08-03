@@ -4,7 +4,7 @@ ThemeData getApplicationTheme() {
   return ThemeData(
     useMaterial3: false,
     primarySwatch: Colors.blue,
-    scaffoldBackgroundColor: Colors.blue[200],
+    scaffoldBackgroundColor: const Color.fromARGB(255, 216, 216, 216),
     fontFamily: 'Urbanist Regular',
   );
 }

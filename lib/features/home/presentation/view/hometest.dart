@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ghar_sewa/screens/popular_service_screen.dart';
-import 'package:ghar_sewa/screens/about_us.dart';
-import 'package:ghar_sewa/screens/acheivements_screen.dart';
-import 'package:ghar_sewa/screens/service_provider_detail.dart';
-import 'package:ghar_sewa/screens/top_rated.dart';
-import 'package:ghar_sewa/screens/trending_service_screen.dart';
+import 'package:ghar_sewa/features/home/presentation/screens/popular_service_screen.dart';
+import 'package:ghar_sewa/features/home/presentation/screens/about_us.dart';
+import 'package:ghar_sewa/features/home/presentation/screens/acheivements_screen.dart';
+import 'package:ghar_sewa/features/home/presentation/screens/service_provider_detail.dart';
+import 'package:ghar_sewa/features/home/presentation/screens/top_rated.dart';
+import 'package:ghar_sewa/features/home/presentation/screens/trending_service_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -146,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                 () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const ServiceProviderDetail(),
+                    builder: (_) => const ProviderDetailScreen(provider: {}, serviceId: ' ',),
                   ),
                 ),
               ),

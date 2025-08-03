@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ghar_sewa/view/main_navbar_page.dart';
+import 'package:ghar_sewa/features/home/presentation/view/main_navbar_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
